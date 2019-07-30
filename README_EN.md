@@ -5,6 +5,7 @@
 ### Brief introduction
 SeeWeather is an following ** Material Design** Weather application.Use	the least Permission to do the best with the least experience.
 
+
 - CardView Display(Current weather conditions,The next few hours the weather conditions,Life suggestion,A week overview)
 - Cache data, reduce network requests, ensure that offline viewing
 - Built-in two sets of icons
