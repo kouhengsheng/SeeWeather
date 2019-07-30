@@ -3,6 +3,8 @@ package com.xiecc.seeWeather.modules.main.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,17 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindView;
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.xiecc.seeWeather.R;
 import com.xiecc.seeWeather.base.BaseViewHolder;
-import com.xiecc.seeWeather.component.PLog;
 import com.xiecc.seeWeather.common.utils.SharedPreferenceUtil;
 import com.xiecc.seeWeather.common.utils.Util;
+import com.xiecc.seeWeather.component.PLog;
 import com.xiecc.seeWeather.modules.main.domain.Weather;
+
 import java.util.List;
+
+import butterknife.BindView;
 
 public class MultiCityAdapter extends RecyclerView.Adapter<MultiCityAdapter.MultiCityViewHolder> {
     private Context mContext;
@@ -87,14 +92,15 @@ public class MultiCityAdapter extends RecyclerView.Adapter<MultiCityAdapter.Mult
             }
 
             Glide.with(mContext)
-                .load(SharedPreferenceUtil.getInstance().getInt(weather.now.cond.txt, R.mipmap.none))
-                .asBitmap()
+					.asBitmap()
+					.load(SharedPreferenceUtil.getInstance().getInt(weather.now.cond.txt, R.mipmap.none))
                 .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        mDialogIcon.setImageBitmap(resource);
-                        mDialogIcon.setColorFilter(Color.WHITE);
-                    }
+					@Override
+					public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+						mDialogIcon.setImageBitmap(resource);
+						mDialogIcon.setColorFilter(Color.WHITE);
+					}
+
                 });
 
             int code = Integer.valueOf(weather.now.cond.code);
